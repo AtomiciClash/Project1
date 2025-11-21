@@ -63,7 +63,7 @@ pinMode(A7,INPUT);
 
 
  turnRight(); // Next Turn
- delay(540);
+ delay(543);
  stop();
   delay(3000);
 
