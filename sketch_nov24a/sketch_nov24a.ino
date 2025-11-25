@@ -1,31 +1,33 @@
 #include <MeMCore.h>
 
+MeDCMotor motor1(M1);
+MeDCMotor motor2(M2);
 MeLineFollower lineFinder(PORT_2);
-
+MeRGBLed led(0,30); 
  void forward() {
-  motor1.run(-100);
-  motor2.run(100);
+  motor1.run(-70);
+  motor2.run(70);
   led.setColor(0,255,0);
   led.show();
 }
 
 void backward() {
-  motor1.run(100);
-  motor2.run(-100);
+  motor1.run(70);
+  motor2.run(-70);
   led.setColor(0,255,0);
   led.show();
 }
 
 void turnRight(){
-  motor1.run(-100);
-  motor2.run(-100);
+  motor1.run(-70);
+  motor2.run(0);
   led.setColor(0,255,0);
   led.show();
 }
 
 void turnLeft(){
-  motor1.run(100);
-  motor2.run(100);
+  motor1.run(0);
+  motor2.run(70);
   led.setColor(0,255,0);
   led.show();
 }
@@ -40,7 +42,9 @@ void stop(){
 void setup()
 
 {
-
+pinMode(A7,INPUT);
+ while(analogRead(A7) != 0);
+ 
   Serial.begin(9600);
 
 }
@@ -65,6 +69,8 @@ void loop()
 
       Serial.println("Sensor 1 on black and Sensor2 on black");
       forward();
+      delay(70);
+      stop();
 
     }
 
@@ -74,6 +80,8 @@ void loop()
 
      Serial.println("Sensor 1 on white and Sensor 2 on black");
      turnRight();
+     delay(70);
+     stop();
     }
 
   else if (lineFinder.readSensor1()==0 && lineFinder.readSensor2()==1)
@@ -82,13 +90,18 @@ void loop()
 
     Serial.println("Sensor 1 on Black and Sensor 2 on White");
       turnLeft();
+      delay(70);
+      stop();
+     
     }
   else //(lineFinder.readSensor1()==1 && lineFinder.readSensor2()==1)
 
     {
 
     Serial.println("Sensor 1 on White and Sensor 2 on White");
-    stop();
+      backward();
+      delay(70);
+      stop();
     }
 
 delay(1000);
