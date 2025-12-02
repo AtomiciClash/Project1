@@ -5,21 +5,21 @@ MeDCMotor motor2(M2);
 MeLineFollower lineFinder(PORT_2);
 MeRGBLed led(0,30); 
  void forward() {
-  motor1.run(-70);
-  motor2.run(70);
+  motor1.run(-80);
+  motor2.run(80);
   led.setColor(0,255,0);
   led.show();
 }
 
 void backward() {
-  motor1.run(70);
-  motor2.run(-70);
+  motor1.run(80);
+  motor2.run(-80);
   led.setColor(0,255,0);
   led.show();
 }
 
 void turnRight(){
-  motor1.run(-70);
+  motor1.run(-80);
   motor2.run(0);
   led.setColor(0,255,0);
   led.show();
@@ -27,7 +27,7 @@ void turnRight(){
 
 void turnLeft(){
   motor1.run(0);
-  motor2.run(70);
+  motor2.run(80);
   led.setColor(0,255,0);
   led.show();
 }
@@ -69,8 +69,8 @@ void loop()
 
       Serial.println("Sensor 1 on black and Sensor2 on black");
       forward();
-      delay(70);
-      stop();
+      delay(1);
+      //stop();
 
     }
 
@@ -79,9 +79,10 @@ void loop()
    {
 
      Serial.println("Sensor 1 on white and Sensor 2 on black");
-     turnRight();
-     delay(70);
      stop();
+     turnRight();
+     delay(1);
+     //stop();
     }
 
   else if (lineFinder.readSensor1()==0 && lineFinder.readSensor2()==1)
@@ -89,9 +90,10 @@ void loop()
     {
 
     Serial.println("Sensor 1 on Black and Sensor 2 on White");
-      turnLeft();
-      delay(70);
       stop();
+      turnLeft();
+      delay(1);
+      //stop();
      
     }
   else //(lineFinder.readSensor1()==1 && lineFinder.readSensor2()==1)
@@ -100,10 +102,10 @@ void loop()
 
     Serial.println("Sensor 1 on White and Sensor 2 on White");
       backward();
-      delay(70);
-      stop();
+      delay(1);
+      //stop();
     }
 
-delay(1000);
+
 
 }
