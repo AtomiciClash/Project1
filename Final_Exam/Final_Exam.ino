@@ -59,17 +59,22 @@ Serial.print("Distance: ");
 
 
 if (ultraSonic.distanceCm() < 10){
-  
-if (tick == 0){
+    //delay(); //wait
     turnLeft();
-    delay(520);
-    tick = tick + 1;
-  } else if (tick == 1){
-    turnRight();
-    delay(520);
-    tick = tick - 1;
-}
+    delay(620); // 90
 
-}
+    if (ultraSonic.distanceCm() < 10){
+      //delay(); //wait
+      turnRight();
+      delay(1240); // 180
+      if (ultraSonic.distanceCm() < 10) {
+        //delay(); //wait
+        turnRight();
+        delay(620); // 90
+      }
+    }
+  } 
 forward();
 }
+
+
